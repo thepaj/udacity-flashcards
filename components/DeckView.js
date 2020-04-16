@@ -26,7 +26,6 @@ class DeckView extends React.Component {
 
         this.props.dispatch(deleteDeck(title));
         let removed = removeDeck(title)
-        console.log('remove clicked')
 
         if (removed) {
             this.props.navigation.navigate('Dashboard');

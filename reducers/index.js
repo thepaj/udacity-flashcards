@@ -34,9 +34,3 @@ function decks(state = {}, action) {
 }
 
 export default decks;
-
-//  ...state,
-//     [action.question.author]: {
-//                     ...state[action.question.author],
-//         questions: state[action.question.author].questions.concat([action.question.id])
-// }

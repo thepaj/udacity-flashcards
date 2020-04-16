@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { peach, white, blue } from '../utils/colors';
+import { white, blue } from '../utils/colors';
 
 export default function TextButton({ onPress, children, style = {} }) {
     return (

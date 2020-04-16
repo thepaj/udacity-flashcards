@@ -15,7 +15,6 @@ class Dashboard extends React.Component {
 
     // navigates to the deck's deckview page
     onDeckPress = (title) => {
-        console.log('on deck')
         this.props.navigation.navigate('Deck', { title });
     }
 
@@ -78,14 +77,12 @@ const styles = StyleSheet.create({
 
 // mapToProps or deck and their question properties
 function mapStateToProps(decks) {
-    const deckIds = Object.keys(decks)
+    const deckIds = Object.keys(decks);
     let deckArray = [];
 
     deckIds.map((id) => {
         deckArray.push(decks[id])
     })
-
-    console.log(deckArray)
 
     return {
         deckArray

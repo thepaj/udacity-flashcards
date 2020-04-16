@@ -1,16 +1,8 @@
 import React from 'react';
-import { Text, View, StyleSheet, Button } from 'react-native';
+import { Text, View, StyleSheet } from 'react-native';
 import TextButton from './TextButton';
 import { peach, white } from '../utils/colors';
-
-// The Quiz view starts with a question from the selected deck.
-// The question is displayed, along with a button to show the answer.
-// Pressing the 'Show Answer' button displays the answer.
-// Buttons are included to allow the student to mark their guess as 'Correct' or 'Incorrect'
-// The view displays the number of questions remaining.
-// When the last question is answered, a score is displayed.This can be displayed as a percentage of correct answers or just the number of questions answered correctly.
-// When the score is displayed, buttons are displayed to either start the quiz over or go back to the Individual Deck view.
-// Both the 'Restart Quiz' and 'Back to Deck' buttons route correctly to their respective views.
+import { clearLocalNotification, setLocalNotification } from '../utils/notification';
 
 class QuizPage extends React.Component {
     state = {
@@ -42,6 +34,15 @@ class QuizPage extends React.Component {
         })
     }
 
+    onAgain = () => {
+        this.setState({
+            index: 0,
+            correct: 0,
+            wrong: 0,
+            showAnswer: false
+        })
+    }
+
     render() {
         const { questions } = this.props.route.params;
         const { index, showAnswer, correct, wrong } = this.state;
@@ -56,11 +57,14 @@ class QuizPage extends React.Component {
                         onAnswerPress={this.onShowAnswer}
                         onCorrectPress={this.onAnswerCorrect}
                         onWrongPress={this.onAnswerWrong}
+                        index={index + 1}
+                        questionsLength={questions.length}
                     />
                     : <EndPage
                         correct={correct}
                         wrong={wrong}
                         onPress={() => this.props.navigation.goBack()}
+                        onAgainPress={this.onAgain}
                     />
                 }
             </View>
@@ -68,12 +72,15 @@ class QuizPage extends React.Component {
     }
 }
 
-function Quiz({ showAnswer, question, answer, onAnswerPress, onCorrectPress, onWrongPress }) {
+function Quiz({ showAnswer, question, answer, onAnswerPress, onCorrectPress, onWrongPress, index, questionsLength }) {
     return (
         <View>
 
             {showAnswer === false
                 ? <View style={styles.questionContainer}>
+                    <View>
+                        <Text style={styles.text}>{index}/{questionsLength}</Text>
+                    </View>
                     <View style={styles.textContainer}>
                         <Text style={styles.text}>{question}</Text>
                         <View style={styles.buttonContainer}>
@@ -82,7 +89,11 @@ function Quiz({ showAnswer, question, answer, onAnswerPress, onCorrectPress, onW
                     </View>
                 </View>
                 : <View style={styles.questionContainer}>
+                    <View>
+                        <Text style={styles.text}>{index}/{questionsLength}</Text>
+                    </View>
                     <View style={styles.textContainer}>
+                        <Text style={styles.text}>{question}</Text>
                         <Text style={styles.text}>{answer}</Text>
                     </View>
                 </View>
@@ -96,7 +107,11 @@ function Quiz({ showAnswer, question, answer, onAnswerPress, onCorrectPress, onW
     )
 }
 
-function EndPage({ correct, wrong, onPress }) {
+function EndPage({ correct, wrong, onPress, onAgainPress }) {
+    // clear notification
+    clearLocalNotification()
+        .then(setLocalNotification);
+
     return (
         <View>
             <View style={styles.questionContainer}>
@@ -108,6 +123,9 @@ function EndPage({ correct, wrong, onPress }) {
             </View>
             <TextButton onPress={onPress}>
                 Return to the deck
+            </TextButton>
+            <TextButton onPress={onAgainPress}>
+                Start the quiz again
             </TextButton>
         </View>
     )

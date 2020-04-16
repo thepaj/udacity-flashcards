@@ -5,6 +5,7 @@ import { peach, white } from '../utils/colors';
 import { addCardToDeck } from '../utils/api';
 import { addQuestion } from '../actions';
 import { connect } from 'react-redux';
+import { setLocalNotification } from '../utils/notification';
 
 class AddCard extends React.Component {
     state = {
@@ -33,6 +34,9 @@ class AddCard extends React.Component {
             addCardToDeck(title, card);
 
             alert('Card has been successfully added to the deck!')
+
+            // set notification
+            setLocalNotification();
 
             // clear textinput
             this.setState({

@@ -1,14 +1,14 @@
 import { AsyncStorage } from 'react-native';
+import { NOTIFICATION_KEY } from './notification';
 
 export async function getDecks() {
-    const keys = await AsyncStorage.getAllKeys();
-    const result = await AsyncStorage.multiGet(keys);
+    let keys = await AsyncStorage.getAllKeys();
+    keys = keys.filter((key) => key !== NOTIFICATION_KEY);
+    let result = await AsyncStorage.multiGet(keys);
     let object = {};
-
 
     result.map(item => {
         object[item[0]] = JSON.parse(item[1])
-        // array.push(JSON.parse(item[1]));
     })
 
     return object;
@@ -29,7 +29,6 @@ export function saveDeckTitle(key, title) {
 export function addCardToDeck(deckTitle, card) {
     return getDeck(deckTitle)
         .then((deck) => {
-            console.log('adding card')
             const deckObject = JSON.parse(deck);
             deckObject.questions.push(card);
 
@@ -40,7 +39,7 @@ export function addCardToDeck(deckTitle, card) {
 export async function removeDeck(key) {
     try {
         await AsyncStorage.removeItem(key);
-        console.log(key);
+
         return true;
     }
     catch (exception) {
