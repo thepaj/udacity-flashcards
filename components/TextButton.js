@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { white, blue } from '../utils/colors';
+import { white, lavender, grey } from '../utils/colors';
 
 export default function TextButton({ onPress, children, style = {} }) {
     return (
@@ -13,10 +13,11 @@ export default function TextButton({ onPress, children, style = {} }) {
 const styles = StyleSheet.create({
     btn: {
         textAlign: 'center',
-        backgroundColor: blue,
+        backgroundColor: grey,
         color: white,
         fontSize: 15,
         padding: 20,
         marginBottom: 10,
+        borderRadius: 10,
     }
 })

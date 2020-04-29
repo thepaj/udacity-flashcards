@@ -1,7 +1,7 @@
 import React from 'react';
-import { Text, View, StyleSheet, Button } from 'react-native';
+import { Text, View, StyleSheet, Button, TouchableOpacity } from 'react-native';
 import TextButton from './TextButton';
-import { peach } from '../utils/colors';
+import { white, green } from '../utils/colors';
 import { connect } from 'react-redux';
 import { removeDeck } from '../utils/api';
 import { deleteDeck } from '../actions';
@@ -52,7 +52,7 @@ class DeckView extends React.Component {
 
                         {questions.length > 0 &&
                             <TextButton
-                                style={{ marginBottom: 20 }}
+                                style={{ backgroundColor: green }}
                                 onPress={() => this.onStartQuiz(questions, title)}
                             >Start quiz</TextButton>
                         }
@@ -60,13 +60,9 @@ class DeckView extends React.Component {
                         <TextButton
                             onPress={() => this.onAddCard(title)}
                         >Add card</TextButton>
-                        <View style={styles.deleteBtn}>
-                            <Button
-                                title="Delete deck"
-                                color={peach}
-                                onPress={() => this.onDeleteDeck(title)}
-                            />
-                        </View>
+                        <TextButton
+                            onPress={() => this.onDeleteDeck(title)}
+                        >Delete Deck</TextButton>
                     </View>
                 }
 
@@ -81,18 +77,17 @@ const styles = StyleSheet.create({
         padding: 20,
     },
     title: {
-        fontSize: 30,
+        fontSize: 40,
         marginTop: 30,
         padding: 20,
         alignSelf: 'center',
+        fontWeight: 'bold',
+        color: '#758184',
     },
     subtitle: {
         alignSelf: 'center',
-        marginBottom: 20,
-    },
-    deleteBtn: {
-        marginTop: 50,
-        fontSize: 10,
+        color: '#758184',
+        marginBottom: 60,
     }
 })
 

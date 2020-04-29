@@ -14,13 +14,13 @@ import AddCard from './components/AddCard';
 import DeckView from './components/DeckView';
 import QuizPage from './components/QuizPage';
 
-import { blue } from './utils/colors';
+import { grey } from './utils/colors';
 import { MaterialCommunityIcons, FontAwesome } from '@expo/vector-icons';
 
 function MyStatusBar({ backgroundColor, ...props }) {
   return (
     <View>
-      <StatusBar translucent backgroundColor={blue} {...props} />
+      <StatusBar translucent backgroundColor={grey} {...props} />
     </View>
   )
 }
@@ -33,15 +33,15 @@ function Home() {
       screenOptions={({ route }) => ({
         tabBarIcon: () => {
           if (route.name === 'Dashboard') {
-            return <MaterialCommunityIcons name='cards-outline' size={30} color={blue} />;
+            return <MaterialCommunityIcons name='cards-outline' size={30} color={grey} />;
           } else if (route.name === 'New deck') {
-            return <FontAwesome name='plus-square-o' size={30} color={blue} />;
+            return <FontAwesome name='plus-square-o' size={30} color={grey} />;
           }
 
         },
       })}
       tabBarOptions={{
-        activeTintColor: blue,
+        activeTintColor: grey,
         inactiveTintColor: 'gray',
       }}
     >

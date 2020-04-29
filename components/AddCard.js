@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, View, StyleSheet, TextInput } from 'react-native';
 import TextButton from './TextButton';
-import { peach, white } from '../utils/colors';
+import { grey, white } from '../utils/colors';
 import { addCardToDeck } from '../utils/api';
 import { addQuestion } from '../actions';
 import { connect } from 'react-redux';
@@ -54,14 +54,14 @@ class AddCard extends React.Component {
                 <Text style={styles.text}>Add new card</Text>
                 <TextInput
                     placeholder='Question'
-                    underlineColorAndroid={peach}
+                    underlineColorAndroid={grey}
                     style={styles.inputField}
                     value={question}
                     onChangeText={(question) => this.setState({ question })}
                 />
                 <TextInput
                     placeholder='Answer'
-                    underlineColorAndroid={peach}
+                    underlineColorAndroid={grey}
                     style={styles.inputField}
                     value={answer}
                     onChangeText={(answer) => this.setState({ answer })}
@@ -81,16 +81,17 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     inputField: {
-        backgroundColor: white,
         fontSize: 20,
         height: 50,
         marginBottom: 30,
         padding: 10,
     },
     text: {
-        fontSize: 30,
+        fontSize: 40,
+        fontWeight: 'bold',
+        color: '#758184',
         alignSelf: 'center',
-        marginBottom: 50,
+        marginBottom: 30,
         padding: 20,
     }
 })

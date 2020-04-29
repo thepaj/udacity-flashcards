@@ -1,8 +1,10 @@
 import React from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
 import TextButton from './TextButton';
-import { peach, white } from '../utils/colors';
+import { black, white, grey, red, green } from '../utils/colors';
 import { clearLocalNotification, setLocalNotification } from '../utils/notification';
+import { Entypo } from '@expo/vector-icons';
+import { whitesmoke } from 'color-name';
 
 class QuizPage extends React.Component {
     state = {
@@ -78,30 +80,36 @@ function Quiz({ showAnswer, question, answer, onAnswerPress, onCorrectPress, onW
 
             {showAnswer === false
                 ? <View style={styles.questionContainer}>
-                    <View>
-                        <Text style={styles.text}>{index}/{questionsLength}</Text>
-                    </View>
                     <View style={styles.textContainer}>
+                        <View>
+                            <Text style={styles.questionNumber}>Question {index}/{questionsLength}</Text>
+                        </View>
                         <Text style={styles.text}>{question}</Text>
                         <View style={styles.buttonContainer}>
-                            <TextButton onPress={onAnswerPress}>Show answer</TextButton>
+                            <TouchableOpacity onPress={onAnswerPress}>
+                                <Text style={styles.showAnswer}>SHOW ANSWER</Text>
+                            </TouchableOpacity>
                         </View>
                     </View>
                 </View>
                 : <View style={styles.questionContainer}>
-                    <View>
-                        <Text style={styles.text}>{index}/{questionsLength}</Text>
-                    </View>
                     <View style={styles.textContainer}>
+                        <View>
+                            <Text style={styles.questionNumber}>Question {index}/{questionsLength}</Text>
+                        </View>
                         <Text style={styles.text}>{question}</Text>
-                        <Text style={styles.text}>{answer}</Text>
+                        <Text style={styles.answerText}>{answer}</Text>
                     </View>
                 </View>
             }
 
-            <View >
-                <TextButton onPress={onCorrectPress}>Correct</TextButton>
-                <TextButton onPress={onWrongPress}>Wrong</TextButton>
+            <View style={styles.iconContainer}>
+                <TouchableOpacity onPress={onCorrectPress}>
+                    <Entypo name='emoji-happy' size={80} color={green} />
+                </TouchableOpacity>
+                <TouchableOpacity onPress={onWrongPress}>
+                    <Entypo name='emoji-sad' size={80} color={red} />
+                </TouchableOpacity>
             </View>
         </View>
     )
@@ -116,7 +124,7 @@ function EndPage({ correct, wrong, onPress, onAgainPress }) {
         <View>
             <View style={styles.questionContainer}>
                 <View style={styles.endContainer}>
-                    <Text style={styles.endText}>End of the quiz</Text>
+                    <Text style={styles.endTitle}>End of the quiz</Text>
                     <Text style={styles.endText}>Correct answers: {correct}</Text>
                     <Text style={styles.endText}>Wrong answers: {wrong}</Text>
                 </View>
@@ -138,26 +146,54 @@ const styles = StyleSheet.create({
     },
     questionContainer: {
         height: 300,
-        backgroundColor: peach,
         marginBottom: 20,
+        backgroundColor: grey,
+        borderColor: grey,
+        borderRadius: 5,
+        borderWidth: 2,
+    },
+    questionNumber: {
+        fontSize: 12,
+        color: white,
+        marginBottom: 10,
     },
     text: {
-        fontSize: 15,
+        fontSize: 18,
+        fontWeight: 'bold',
         color: white,
     },
     textContainer: {
         padding: 30,
     },
     buttonContainer: {
-        marginTop: 150,
+        marginTop: 170,
+    },
+    showAnswer: {
+        alignSelf: 'center',
+        color: white,
+    },
+    answerText: {
+        color: '#339933',
+        fontSize: 20,
+        fontWeight: 'bold',
+        marginTop: 50,
+    },
+    iconContainer: {
+        flexDirection: "row",
+        justifyContent: "space-evenly",
     },
     endContainer: {
         alignItems: "center",
         marginTop: 100,
     },
+    endTitle: {
+        color: white,
+        fontWeight: 'bold',
+        fontSize: 40,
+    },
     endText: {
         color: white,
-        fontSize: 30,
+        fontSize: 20,
     }
 })
 

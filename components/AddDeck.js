@@ -3,7 +3,7 @@ import { View, Text, TextInput, StyleSheet, Button } from 'react-native';
 import TextButton from './TextButton';
 import { connect } from 'react-redux';
 import { addDeck } from '../actions';
-import { peach, blue } from '../utils/colors';
+import { peach, blue, grey } from '../utils/colors';
 import { saveDeckTitle } from '../utils/api';
 
 class AddDeck extends React.Component {
@@ -42,7 +42,7 @@ class AddDeck extends React.Component {
                 <Text style={styles.text}>What's the name of the new deck?</Text>
                 <TextInput
                     placeholder='Name of the new deck'
-                    underlineColorAndroid={peach}
+                    underlineColorAndroid={grey}
                     style={styles.inputField}
                     value={deckName}
                     onChangeText={(deckName) => this.setState({ deckName })}
@@ -68,7 +68,9 @@ const styles = StyleSheet.create({
         padding: 10,
     },
     text: {
-        fontSize: 30,
+        fontSize: 40,
+        fontWeight: 'bold',
+        color: '#758184',
         marginBottom: 50,
         padding: 20,
         alignSelf: 'center',

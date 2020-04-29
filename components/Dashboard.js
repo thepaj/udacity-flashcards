@@ -3,7 +3,8 @@ import { View, Text, StyleSheet, FlatList, TouchableOpacity } from 'react-native
 import { connect } from 'react-redux';
 import { receiveDecks } from '../actions';
 import { getDecks } from '../utils/api';
-import { peach, white } from '../utils/colors';
+import { grey, white, lavender } from '../utils/colors';
+import { black } from 'color-name';
 
 class Dashboard extends React.Component {
     componentDidMount() {
@@ -59,9 +60,12 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
     },
     deckContainer: {
-        backgroundColor: peach,
         padding: 20,
         marginBottom: 10,
+        backgroundColor: grey,
+        borderColor: grey,
+        borderWidth: 2,
+        borderRadius: 10,
     },
     deckTitle: {
         color: white,
