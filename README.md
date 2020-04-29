@@ -14,3 +14,13 @@ To start the project:
 
     npm start
 
+## Overview
+
+First view of the app containing all of the user's decks.
+![Alt text](screenshots/dashboard.jpg )
+
+The quiz view showing the questions and the answer and the right or wrong buttons.
+![Alt text](screenshots/quizpage.jpg )
+
+The view where the user can add their own decks with cards.
+![Alt text](screenshots/adddeck.jpg )
